@@ -13,10 +13,11 @@ def delete_previous_data_file():
     list_files=list(os.walk(dir))[0][2]
     #Selects final_data csv file name
     final_data_file_name=[file for file in list_files if 'final_data' in file][0]
-    print(f'Final data file name: {final_data_file_name}')
+    print(f'Found existing file: {final_data_file_name}')
     #Deletes the file if it does exist
     try:
         os.remove(f'{dir}/{final_data_file_name}')
+        print(f"'{final_data_file_name}' has been deleted")
     except:
         print('Final data file does not exists')
 
