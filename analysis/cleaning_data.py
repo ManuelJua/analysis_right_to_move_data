@@ -30,6 +30,11 @@ def split_columns(pattern_to_find:str,
 
 
 def main_cleaning():
+
+    print('\n','*'*36)
+    print('STARTING CLEANING SCRIPT')
+    print('*'*36)
+
     dir=os.path.realpath('clean_right_to_move_files')
 
     #Finds all file names in right_to_move_files
@@ -39,6 +44,7 @@ def main_cleaning():
     #If the folde is empty, sets the date to '2022-09-30'
     try:
         last_file_date=right_to_move_files.sort_values().str.findall('\d\d\d\d-\d\d-\d\d').iloc[-1][0]
+        print(f'\nLast cleaning date: {last_file_date}')
     except:
         print('Folder is empty')
         last_file_date='2022-09-30'
@@ -58,6 +64,7 @@ def main_cleaning():
             start=time()
             df=pd.read_csv(f"right_to_move_files/right_to_move-{start_date}.csv")
             files_count+=1
+            print(f'Cleaning file right_to_move-{start_date}.csv')
         except:
             #adds one more day to tha file date
             start_date+=delta
@@ -158,12 +165,13 @@ def main_cleaning():
         #adds one more day to tha file date
         start_date+=delta
 
+        print(f'\nFile right_to_move-{start_date}.csv cleaned')
         end=time()
     end_total=time()
     if files_count>0:
-        print(f"{files_count} files processed. Average time per file: {(end_total-start_total)/files_count}")
+        print(f"\n{files_count} files processed. Average time per file: {(end_total-start_total)/files_count}")
     else:
-        print('No files cleaned')
+        print('No files to clean')
 
 
 

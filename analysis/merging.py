@@ -11,11 +11,12 @@ def delete_previous_data_file():
     dir=os.path.realpath('.')
     #Lists files in current directory, excluding child directories
     list_files=list(os.walk(dir))[0][2]
-    #Selects final_data csv file name
-    final_data_file_name=[file for file in list_files if 'final_data' in file][0]
-    print(f'Found existing file: {final_data_file_name}')
-    #Deletes the file if it does exist
+    
     try:
+        #Selects final_data csv file name
+        final_data_file_name=[file for file in list_files if 'final_data' in file][0]
+        print(f'\nFound existing file: {final_data_file_name}')
+        #Deletes the file if it does exist
         os.remove(f'{dir}/{final_data_file_name}')
         print(f"'{final_data_file_name}' has been deleted")
     except:
@@ -50,18 +51,18 @@ def drop_duplicates(frames):
     
     return df_cleaned
 
-#update table with new records
-def update_table(df_final,df):
-    df_final['days_on_market']=1
-    #Write something to update the days on market column bases on the next dataframes
-    print (df_final)
-
-#saves fiel to csv
+#saves file to csv
 def save_df(df,final_name):
     df.to_csv(final_name,index=False)
+    print(f'\nFile {final_name} saved')
 
 #main function to execute the previous functions
 def main():
+
+    print('\n','*'*42)
+    print('STARTING SCRIPT TO MERGE FILES')
+    print('*'*42)
+
     start_date=datetime.date(2022,9,30)
     finish_date=datetime.date.today()
     delta=datetime.timedelta(days=1)
