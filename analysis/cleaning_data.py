@@ -44,7 +44,7 @@ def main_cleaning():
     #If the folde is empty, sets the date to '2022-09-30'
     try:
         last_file_date=right_to_move_files.sort_values().str.findall('\d\d\d\d-\d\d-\d\d').iloc[-1][0]
-        print(f'\nLast cleaning date: {last_file_date}')
+        print(f'\nLast cleaning date: {last_file_date}\n')
     except:
         print('Folder is empty')
         last_file_date='2022-09-30'
@@ -92,11 +92,14 @@ def main_cleaning():
         
         #Using split_columns function to split 'property details' columns into property type,
         #number of bedrooms and number of bathrooms
-        
-        df['property_type']=split_columns('PROPERTY TYPE',df['property_details'])
-        df['bedrooms']=split_columns('BEDROOMS',df['property_details']).str.replace("[×]","",regex=True)
-        df['bathrooms']=split_columns('BATHROOMS',df['property_details']).str.replace("[×]","",regex=True)
-
+        try:
+            df['property_type']=split_columns('PROPERTY TYPE',df['property_details'])
+            df['bedrooms']=split_columns('BEDROOMS',df['property_details']).str.replace("[×]","",regex=True)
+            df['bathrooms']=split_columns('BATHROOMS',df['property_details']).str.replace("[×]","",regex=True)
+        except:
+            df['property_type']=pd.NA
+            df['bedrooms']=pd.NA
+            df['bathrooms']=pd.NA
         # df['bedrooms']=pd.to_numeric(df['bedrooms'],errors='coerce')
         # df['bathrooms']=pd.to_numeric(df['bathrooms'],errors='coerce')
 
