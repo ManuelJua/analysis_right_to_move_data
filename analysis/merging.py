@@ -59,9 +59,10 @@ def save_df(df,final_name):
 #main function to execute the previous functions
 def main():
 
-    print('\n','*'*42)
-    print('STARTING SCRIPT TO MERGE FILES')
-    print('*'*42)
+    print('\n')
+    print('*'*50)
+    print('STARTING SCRIPT TO MERGE FILES'.center(50))
+    print('*'*50)
 
     start_date=datetime.date(2022,9,30)
     finish_date=datetime.date.today()

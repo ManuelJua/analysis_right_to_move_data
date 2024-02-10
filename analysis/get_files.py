@@ -4,9 +4,10 @@ import boto3
 import io
 import os
 
-print('\n','*'*32)
-print('STARTING SCRIPT TO GET NEW FILES')
-print('*'*32)
+print('\n')
+print('*'*50)
+print('STARTING SCRIPT TO GET NEW FILES'.center(50))
+print('*'*50)
 
 dir=os.path.realpath('right_to_move_files')
 #Finds all file names in right_to_move_files
@@ -27,6 +28,8 @@ print('\nTrying to download the following files:')
 for file in file_names_to_download:
     print(file.split('/')[1])
 
+print('\n')
+
 s3=boto3.client('s3')
 
 response = s3.list_objects_v2(
@@ -40,4 +43,4 @@ for obj in objects_name:
         file_content=file['Body'].read()
         df=pd.read_csv(io.BytesIO(file_content))
         df.to_csv(obj,index=False)
-        print(f'{obj} saved')
+        print(f"{obj.split('/')[1]} downloaded")

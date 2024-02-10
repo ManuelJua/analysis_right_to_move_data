@@ -31,9 +31,10 @@ def split_columns(pattern_to_find:str,
 
 def main_cleaning():
 
-    print('\n','*'*36)
-    print('STARTING CLEANING SCRIPT')
-    print('*'*36)
+    print('\n')
+    print('*'*50)
+    print('STARTING CLEANING SCRIPT'.center(50))
+    print('*'*50)
 
     dir=os.path.realpath('clean_right_to_move_files')
 
@@ -168,7 +169,7 @@ def main_cleaning():
         #adds one more day to tha file date
         start_date+=delta
 
-        print(f'\nFile right_to_move-{start_date}.csv cleaned')
+        
         end=time()
     end_total=time()
     if files_count>0:
