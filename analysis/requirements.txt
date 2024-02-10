@@ -1,0 +1,6 @@
+pandas
+matplotlib
+seaborn
+geopy
+scipy
+boto3
