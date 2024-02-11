@@ -1,6 +1,20 @@
 import pandas as pd
 import datetime
 import os
+from time import time
+
+def days_on_market(frames,df):
+    df_days_on_market=(
+        #Concateantes all the dataframes
+        pd.concat(frames,ignore_index=True)
+        ['address']
+        .value_counts()
+        .reset_index()
+    )
+    #Merges this data with the original property dataframe matching each url and renames variable 'count'
+    df=pd.merge(df,df_days_on_market,on='address').rename(columns={'count':'days_on_market'})
+
+    return df
 
 
 
@@ -48,6 +62,7 @@ def get_files(file_names):
 def drop_duplicates(frames):
     df=pd.concat(frames,ignore_index=True)
     df_cleaned=df.drop_duplicates(subset=['address'])
+    df_cleaned=days_on_market(frames=frames,df=df_cleaned)
     
     return df_cleaned
 
@@ -58,7 +73,8 @@ def save_df(df,final_name):
 
 #main function to execute the previous functions
 def main():
-
+    start=time()
+    
     print('\n')
     print('*'*50)
     print('STARTING SCRIPT TO MERGE FILES'.center(50))
@@ -76,6 +92,9 @@ def main():
 
     print("Script executed succesfully")
     print("df shape:",df.shape)
-    
+
+    end=time()
+    print(f'Execution time: {round(end-start,2)} seconds')
+
 #Execution of main()    
 main()
