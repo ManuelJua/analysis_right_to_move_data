@@ -1,6 +1,6 @@
-pandas
-matplotlib
-seaborn
-geopy
-scipy
-boto3
+boto3==1.34.11
+geopy==2.4.1
+matplotlib==3.7.4
+pandas==2.0.3
+scipy==1.10.1
+seaborn==0.13.1
